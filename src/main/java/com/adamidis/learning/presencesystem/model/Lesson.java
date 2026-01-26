@@ -1,5 +1,6 @@
 package com.adamidis.learning.presencesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -19,6 +20,7 @@ public class Lesson extends BaseEntity {
 
     @ManyToMany(mappedBy = "lessons", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
     private Set<Instructor> instructors = new HashSet<>();
 
     public Lesson() {
@@ -43,5 +45,13 @@ public class Lesson extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(Set<Instructor> instructors) {
+        this.instructors = instructors;
     }
 }

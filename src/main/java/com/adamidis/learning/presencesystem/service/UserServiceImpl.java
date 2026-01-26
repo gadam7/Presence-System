@@ -3,9 +3,11 @@ package com.adamidis.learning.presencesystem.service;
 import com.adamidis.learning.presencesystem.dto.AuthorityDto;
 import com.adamidis.learning.presencesystem.dto.UserDto;
 import com.adamidis.learning.presencesystem.model.Authority;
+import com.adamidis.learning.presencesystem.model.Instructor;
 import com.adamidis.learning.presencesystem.model.Role;
 import com.adamidis.learning.presencesystem.model.User;
 import com.adamidis.learning.presencesystem.repository.AuthorityRepository;
+import com.adamidis.learning.presencesystem.repository.InstructorRepository;
 import com.adamidis.learning.presencesystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,14 +23,17 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
+    private final InstructorRepository instructorRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                             AuthorityRepository authorityRepository,
+                            InstructorRepository instructorRepository,
                             PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
+        this.instructorRepository = instructorRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -113,8 +118,20 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         User tempUser = userRepository.findById(id) // Fetch user by ID
                 .orElseThrow(() -> new RuntimeException("Did not found user id - " + id)); // Throws exception if user not found
-        userRepository.delete(tempUser); // Delete the user entity
+
+        // 1. remove associated authorities
         authorityRepository.deleteByUserId(tempUser.getId()); // Delete associated authorities
+
+        // 2. clear lessons if the user is an instructor
+        Instructor instructor = instructorRepository.findByUser(tempUser);
+        if (instructor != null) {
+            instructor.getLessons().clear();
+            instructorRepository.delete(instructor);
+        }
+
+        // 3. delete the user
+        userRepository.delete(tempUser); // Delete the user entity
+
     }
 
     // --- Helper Method to Convert Entity to DTO ---
