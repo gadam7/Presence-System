@@ -11,4 +11,8 @@ public interface LessonService {
     Lesson findById(Integer id);
 
     Lesson save(Lesson lesson, Integer instructorId);
+
+    Lesson update(Integer id, Lesson tempLesson);
+
+    void delete(Integer id);
 }

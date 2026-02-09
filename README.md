@@ -19,6 +19,7 @@ courses, lessons and attendance data storage tracking.
 ## API Endpoints (✅ / ❌)
 
 - `POST /api/users` - Register a new user ✅
+  ![Screenshot](static/screenshots/GET_api_users.png)
 - `GET /api/users/{id}` - Get user details by ID ✅
 - `GET /api/users` - Get all users ✅
 - `PUT /api/users/{id}` - Update user details ✅
@@ -26,8 +27,8 @@ courses, lessons and attendance data storage tracking.
 - `POST /api/lessons` - Create a new lesson ✅
 - `GET /api/lessons/{id}` - Get lesson details by ID ✅
 - `GET /api/lessons` - Get all lessons ✅
-- `PUT /api/lessons/{id}` - Update lesson details - To be implemented ❌
-- `DELETE /api/lessons/{id}` - Delete lesson by ID - To be implemented ❌
+- `PUT /api/lessons/{id}` - Update lesson details - To be implemented ✅
+- `DELETE /api/lessons/{id}` - Delete lesson by ID - To be implemented ✅
 
 > Note: More endpoints for Instructors, Students, Courses, and Attendance will be added in future updates.
 

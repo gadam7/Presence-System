@@ -4,6 +4,7 @@ import com.adamidis.learning.presencesystem.dto.LessonCreateDto;
 import com.adamidis.learning.presencesystem.model.Lesson;
 import com.adamidis.learning.presencesystem.service.LessonService;
 import com.adamidis.learning.presencesystem.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -28,8 +29,7 @@ public class LessonRestController {
 
     @GetMapping("/lessons/{id}")
     public Lesson findLessonById(@PathVariable Integer id) {
-        Lesson tempLesson = lessonService.findById(id);
-        return tempLesson;
+        return lessonService.findById(id);
     }
 
     @PostMapping("/lessons")
@@ -41,5 +41,17 @@ public class LessonRestController {
                 ),
                 lessonCreateDto.getInstructorId()
         );
+    }
+
+    @PutMapping("/lessons/{id}")
+    public ResponseEntity<Lesson> updateLesson(@PathVariable Integer id, @RequestBody Lesson lesson) {
+        Lesson updatedLesson = lessonService.update(id, lesson);
+        return ResponseEntity.ok(updatedLesson);
+    }
+
+    @DeleteMapping("/lessons/{id}")
+    public String deleteLesson(@PathVariable Integer id) {
+        lessonService.delete(id);
+        return "Deleted lesson with id - " + id + " successfully";
     }
 }
