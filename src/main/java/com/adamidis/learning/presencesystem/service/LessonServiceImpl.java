@@ -1,16 +1,13 @@
 package com.adamidis.learning.presencesystem.service;
 
-import com.adamidis.learning.presencesystem.dto.UserDto;
 import com.adamidis.learning.presencesystem.model.Instructor;
 import com.adamidis.learning.presencesystem.model.Lesson;
 import com.adamidis.learning.presencesystem.repository.InstructorRepository;
 import com.adamidis.learning.presencesystem.repository.LessonsRepository;
 import com.adamidis.learning.presencesystem.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;

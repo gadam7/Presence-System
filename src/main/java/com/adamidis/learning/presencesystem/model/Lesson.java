@@ -23,6 +23,10 @@ public class Lesson extends BaseEntity {
     @JsonIgnore
     private Set<Instructor> instructors = new HashSet<>();
 
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Classroom> classrooms = new HashSet<>();
+
     public Lesson() {
     }
 
@@ -53,5 +57,13 @@ public class Lesson extends BaseEntity {
 
     public void setInstructors(Set<Instructor> instructors) {
         this.instructors = instructors;
+    }
+
+    public Set<Classroom> getClassrooms() {
+        return classrooms;
+    }
+
+    public void setClassrooms(Set<Classroom> classrooms) {
+        this.classrooms = classrooms;
     }
 }

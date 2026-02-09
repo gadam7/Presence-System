@@ -1,17 +1,14 @@
 package com.adamidis.learning.presencesystem.config;
 
-import com.adamidis.learning.presencesystem.model.Authority;
-import com.adamidis.learning.presencesystem.model.Instructor;
-import com.adamidis.learning.presencesystem.model.Role;
-import com.adamidis.learning.presencesystem.model.User;
-import com.adamidis.learning.presencesystem.repository.AuthorityRepository;
-import com.adamidis.learning.presencesystem.repository.InstructorRepository;
-import com.adamidis.learning.presencesystem.repository.LessonsRepository;
-import com.adamidis.learning.presencesystem.repository.UserRepository;
+import com.adamidis.learning.presencesystem.model.*;
+import com.adamidis.learning.presencesystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -27,6 +24,9 @@ public class DataSeeder implements CommandLineRunner {
 
     @Autowired
     private LessonsRepository lessonsRepository;
+
+    @Autowired
+    private ClassroomRepository classroomRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -98,6 +98,32 @@ public class DataSeeder implements CommandLineRunner {
                 instructorRepository.save(instructorProfile);
 
                 System.out.println("Assigned lessons to instructors.");
+
+                if (classroomRepository.count() == 0) {
+                    Instructor adminProfileReloaded = instructorRepository.findAll().get(0);
+                    Instructor instructorProfileReloaded = instructorRepository.findAll().get(1);
+                    Lesson javaBasics = lessonsRepository.findAll().get(0);
+                    Lesson springBoot = lessonsRepository.findAll().get(1);
+
+                    Classroom classroom1 = new Classroom();
+                    classroom1.setClassName("Java 101 - Morning Session");
+                    classroom1.setClassDate(LocalDate.of(2026, 2, 15));
+                    classroom1.setClassTime(LocalTime.of(9, 0));
+                    classroom1.setInstructor(adminProfileReloaded);
+                    classroom1.setLesson(javaBasics);
+
+                    Classroom classroom2 = new Classroom();
+                    classroom2.setClassName("Spring Boot - Afternoon Session");
+                    classroom2.setClassDate(LocalDate.of(2026, 2, 16));
+                    classroom2.setClassTime(LocalTime.of(14, 0));
+                    classroom2.setInstructor(instructorProfileReloaded);
+                    classroom2.setLesson(springBoot);
+
+                    classroomRepository.save(classroom1);
+                    classroomRepository.save(classroom2);
+
+                    System.out.println("DB seeded with default classrooms.");
+                }
             }
         }
     }

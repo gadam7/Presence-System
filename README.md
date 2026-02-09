@@ -19,16 +19,30 @@ courses, lessons and attendance data storage tracking.
 ## API Endpoints (✅ / ❌)
 
 - `POST /api/users` - Register a new user ✅
-  ![Screenshot](static/screenshots/GET_api_users.png)
+  ![Screenshot](src/main/resources/static/screenshots/POST_api_users.png)
 - `GET /api/users/{id}` - Get user details by ID ✅
+  ![Screenshot](src/main/resources/static/screenshots/GET_api_users_id.png)
 - `GET /api/users` - Get all users ✅
+  ![Screenshot](src/main/resources/static/screenshots/GET_api_users.png)
 - `PUT /api/users/{id}` - Update user details ✅
+  ![Screenshot](src/main/resources/static/screenshots/PUT_api_users_id.png)
 - `DELETE /api/users/{id}` - Delete user by ID ✅
+  ![Screenshot](src/main/resources/static/screenshots/DELETE_api_users_id.png)
 - `POST /api/lessons` - Create a new lesson ✅
+  ![Screenshot](src/main/resources/static/screenshots/POST_api_lessons.png)
 - `GET /api/lessons/{id}` - Get lesson details by ID ✅
+  ![Screenshot](src/main/resources/static/screenshots/GET_api_lessons_id.png)
 - `GET /api/lessons` - Get all lessons ✅
-- `PUT /api/lessons/{id}` - Update lesson details - To be implemented ✅
-- `DELETE /api/lessons/{id}` - Delete lesson by ID - To be implemented ✅
+  ![Screenshot](src/main/resources/static/screenshots/GET_api_lessons.png)
+- `PUT /api/lessons/{id}` - Update lesson details ✅
+  ![Screenshot](src/main/resources/static/screenshots/PUT_api_lessons_id.png)
+- `DELETE /api/lessons/{id}` - Delete lesson by ID ✅
+  ![Screenshot](src/main/resources/static/screenshots/DELETE_api_lessons_id.png)
+- `GET /api/classrooms` - Get all classrooms ✅
+  ![Screenshot](src/main/resources/static/screenshots/GET_api_classrooms.png)
+- `POST /api/classrooms` - Create a new classroom ✅
+  ![Screenshot](src/main/resources/static/screenshots/POST_api_classrooms.png)
+- `GET /api/classrooms/{id}` - Get classroom details by ID - work in progress ❌
 
 > Note: More endpoints for Instructors, Students, Courses, and Attendance will be added in future updates.
 

@@ -25,6 +25,9 @@ public class Instructor extends BaseEntity {
     )
     private Set<Lesson> lessons = new HashSet<>();
 
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+    private Set<Classroom> classrooms = new HashSet<>();
+
     public Instructor() {
     }
 
@@ -56,5 +59,13 @@ public class Instructor extends BaseEntity {
 
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    public Set<Classroom> getClassrooms() {
+        return classrooms;
+    }
+
+    public void setClassrooms(Set<Classroom> classrooms) {
+        this.classrooms = classrooms;
     }
 }
